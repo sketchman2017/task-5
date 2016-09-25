@@ -1,0 +1,35 @@
+<! doctype html>
+<html lang=en>
+<head>
+    <meta charset=utf-8>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+
+<div ng-controller="myController">
+    {{data.time}}
+    
+    <br/>
+    <button ng-click="updateTime()">update time - ng-click</button>
+    <button style="width: 250px; height: 20px; padding-top: 15px; padding-bottom: 25px;" id="updateTimeButton">Not Angular related button</button>
+</div>
+
+<script>
+    var module = angular.module("myapp", []);    
+    var mycontroller1 = module.controller("myController", function($scope){
+        $scope.data = {time: new Date() };
+
+        $scope.updateTime = function() {
+            $scope.data.time = new Date();
+        }
+        
+        document.getElementById("updateTimeButton").addEventListener("click", function() {
+            console.log("update time clicked");
+            $scope.data.time = new Date();
+            $scope.$digest();
+        });        
+    });
+
+</script>
+</body>
+</html>
